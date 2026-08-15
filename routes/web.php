@@ -4,6 +4,7 @@ use App\Http\Controllers\Settings;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketTypeController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('events/{event}/ticket-types/{ticketType}', [TicketTypeController::class, 'update'])->name('events.ticket-types.update');
 
     Route::delete('events/{event}/ticket-types/{ticketType}', [TicketTypeController::class, 'destroy'])->name('events.ticket-types.destroy');
+
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 
 
     Route::get('settings/profile', [Settings\ProfileController::class, 'edit'])->name('settings.profile.edit');
