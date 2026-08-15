@@ -68,7 +68,7 @@
                             </td>
 
                             <td class="px-6 py-4">
-                                {{ ucfirst($order->status) }}
+                                {{ $order->status->label() }}
                             </td>
 
                             <td class="px-6 py-4">

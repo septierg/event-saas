@@ -20,7 +20,7 @@
             </div>
 
             <span class="px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700">
-                {{ ucfirst($order->status) }}
+                {{ $order->status->label() }}
             </span>
         </div>
     </div>
