@@ -40,6 +40,12 @@ class OrderService
                     continue;
                 }
 
+                if ($ticketType->quantity !== null && $quantity > $ticketType->quantity) {
+                    throw new \RuntimeException(
+                        "Not enough tickets available for {$ticketType->name}."
+                    );
+                }
+
                 $unitPrice = $ticketType->price;
                 $itemTotal = $unitPrice * $quantity;
 

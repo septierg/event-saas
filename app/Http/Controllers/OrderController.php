@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Customer;
+use App\Models\Event;
+use App\Services\OrderService;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -27,6 +31,47 @@ class OrderController extends Controller
         ]);
 
         return view('orders.show', compact('order'));
+    }
+
+    public function create()
+    {
+        $customers = Customer::orderBy('last_name')->get();
+
+        $events = Event::query()
+            ->whereIn('status', ['draft', 'published'])
+            ->orderBy('start_date')
+            ->with('ticketTypes')
+            ->get();
+
+        return view('orders.create', compact(
+            'customers',
+            'events'
+        ));
+    }
+
+    public function store(Request $request, OrderService $orderService)
+    {
+        $validated = $request->validate([
+            'customer_id' => ['required', 'exists:customers,id'],
+            'event_id' => ['required', 'exists:events,id'],
+            'items' => ['required', 'array', 'min:1'],
+            'items.*.ticket_type_id' => ['required', 'integer'],
+            'items.*.quantity' => ['required', 'integer', 'min:0'],
+        ]);
+
+        $customer = Customer::findOrFail($validated['customer_id']);
+
+        $event = Event::findOrFail($validated['event_id']);
+
+        $order = $orderService->create(
+            $customer,
+            $event,
+            $validated['items']
+        );
+
+        return redirect()
+            ->route('orders.show', $order)
+            ->with('status', 'Order created successfully.');
     }
 
 }
