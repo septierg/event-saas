@@ -34,6 +34,12 @@
         <form method="POST" action="{{ route('orders.store') }}">
             @csrf
 
+            @if (session('error'))
+                <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             {{-- Header --}}
             <div class="mb-6">
                 <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">

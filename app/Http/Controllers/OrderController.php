@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Event;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use App\Exceptions\OrderException;
 
 class OrderController extends Controller
 {
@@ -63,11 +64,17 @@ class OrderController extends Controller
 
         $event = Event::findOrFail($validated['event_id']);
 
-        $order = $orderService->create(
-            $customer,
-            $event,
-            $validated['items']
-        );
+        try {
+            $order = $orderService->create(
+                $customer,
+                $event,
+                $validated['items']
+            );
+        } catch (OrderException $e) {
+            return back()
+                ->withInput()
+                ->with('error', $e->getMessage());
+        }
 
         return redirect()
             ->route('orders.show', $order)
