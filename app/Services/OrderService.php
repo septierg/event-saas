@@ -32,7 +32,9 @@ class OrderService
             foreach ($items as $item) {
 
                 $ticketType = $event->ticketTypes()
-                    ->findOrFail($item['ticket_type_id']);
+                    ->whereKey($item['ticket_type_id'])
+                    ->lockForUpdate()
+                    ->firstOrFail();
 
                 $quantity = (int) $item['quantity'];
 
@@ -55,6 +57,10 @@ class OrderService
                     'unit_price' => $unitPrice,
                     'total' => $itemTotal,
                 ]);
+
+                if ($ticketType->quantity !== null) {
+                    $ticketType->decrement('quantity', $quantity);
+                }
 
                 $subtotal += $itemTotal;
             }
