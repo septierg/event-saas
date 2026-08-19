@@ -8,6 +8,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Enums\OrderStatus;
+use App\Exceptions\OrderException;
 
 class OrderService
 {
@@ -20,6 +21,12 @@ class OrderService
 
             $subtotal = 0;
 
+            if ($event->status !== 'published') {//check event status
+                throw new OrderException(
+                    "The event {$event->title} is not available for sale."
+                );
+            }
+            
             $order = Order::create([
                 'customer_id' => $customer->id,
                 'event_id' => $event->id,
@@ -28,6 +35,7 @@ class OrderService
                 'subtotal' => 0,
                 'total' => 0,
             ]);
+  
 
             foreach ($items as $item) {
 
@@ -36,14 +44,34 @@ class OrderService
                     ->lockForUpdate()
                     ->firstOrFail();
 
+                if ($ticketType->status !== 'active') {//check ticket status
+                    throw new OrderException(
+                        "The ticket type {$ticketType->name} is not active."
+                    );
+                }
+
+                $now = now();
+
+                if (
+                    ($ticketType->sales_start && $now->lt($ticketType->sales_start)) ||
+                    ($ticketType->sales_end && $now->gt($ticketType->sales_end))
+                ) {
+                    throw new OrderException(//check ticket sale date and end
+                        "Ticket sales are not currently available for {$ticketType->name}."
+                    );
+                }
+
                 $quantity = (int) $item['quantity'];
 
                 if ($quantity < 1) {
                     continue;
                 }
 
-                if ($ticketType->quantity !== null && $quantity > $ticketType->quantity) {
-                    throw new \RuntimeException(
+                if (
+                    $ticketType->quantity !== null &&
+                    $quantity > $ticketType->quantity
+                ) {
+                    throw new OrderException(//check ticket quatity
                         "Not enough tickets available for {$ticketType->name}."
                     );
                 }

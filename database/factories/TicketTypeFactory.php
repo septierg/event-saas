@@ -15,8 +15,12 @@ class TicketTypeFactory extends Factory
 
     public function definition(): array
     {
+        $salesStart = now();
+        $salesEnd = $salesStart->copy()->addMonths(2);
+
         return [
             'event_id' => Event::factory(),
+
             'name' => fake()->randomElement([
                 'Early Bird',
                 'Regular',
@@ -24,11 +28,17 @@ class TicketTypeFactory extends Factory
                 'Workshop',
                 'Spectator',
             ]),
+
             'description' => fake()->optional()->sentence(),
+
             'price' => fake()->randomFloat(2, 10, 100),
+
             'quantity' => fake()->numberBetween(30, 300),
-            'sales_start' => now(),
-            'sales_end' => now()->addMonths(2),
+
+            'sales_start' => $salesStart,
+
+            'sales_end' => $salesEnd,
+
             'status' => 'active',
         ];
     }
