@@ -39,6 +39,19 @@
                     {{ session('error') }}
                 </div>
             @endif
+            @if ($errors->any())
+                <div class="mb-6 rounded-lg bg-red-50 p-4 dark:bg-red-900/30">
+                    <h2 class="text-sm font-semibold text-red-800 dark:text-red-300">
+                        Impossible de créer la commande
+                    </h2>
+
+                    <ul class="mt-2 list-disc list-inside text-sm text-red-700 dark:text-red-300">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             {{-- Header --}}
             <div class="mb-6">
@@ -51,16 +64,6 @@
                 </p>
             </div>
 
-            {{-- Validation errors --}}
-            @if ($errors->any())
-                <div class="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-300">
-                    <ul class="list-disc pl-5 space-y-1">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
 
@@ -88,8 +91,7 @@
                                 value="{{ $customer->id }}"
                                 @selected(old('customer_id') == $customer->id)
                             >
-                                {{ $customer->first_name }}
-                                {{ $customer->last_name }}
+                                {{ $customer->first_name }} {{ $customer->last_name }}
                                 — {{ $customer->email }}
                             </option>
                         @endforeach
@@ -113,7 +115,10 @@
                         class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                     >
                         @foreach ($events as $event)
-                            <option value="{{ $event->id }}">
+                            <option
+                                value="{{ $event->id }}"
+                                @selected(old('event_id') == $event->id)
+                            >
                                 {{ $event->title }}
                                 — {{ $event->start_date->format('d/m/Y') }}
                             </option>

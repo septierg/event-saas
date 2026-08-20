@@ -55,10 +55,34 @@ class OrderController extends Controller
         $validated = $request->validate([
             'customer_id' => ['required', 'exists:customers,id'],
             'event_id' => ['required', 'exists:events,id'],
+
             'items' => ['required', 'array', 'min:1'],
-            'items.*.ticket_type_id' => ['required', 'integer'],
-            'items.*.quantity' => ['required', 'integer', 'min:0'],
+
+            'items.*.ticket_type_id' => [
+                'required',
+                'integer',
+                'exists:ticket_types,id',
+            ],
+
+            'items.*.quantity' => [
+                'nullable',
+                'integer',
+                'min:0',
+            ],
         ]);
+
+        $hasTickets = collect($validated['items'])
+            ->contains(function ($item) {
+                return ($item['quantity'] ?? 0) > 0;
+            });
+
+        if (! $hasTickets) {
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'items' => 'Veuillez sélectionner au moins un billet.',
+                ]);
+        }
 
         $customer = Customer::findOrFail($validated['customer_id']);
 
