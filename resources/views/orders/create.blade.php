@@ -4,6 +4,8 @@
         class="max-w-5xl mx-auto"
         x-data="{
             selectedEvent: '{{ old('event_id', $events->first()?->id) }}',
+            oldItems: @js(old('items', [])),
+            errors: @js($errors->getMessages()),
 
             get tickets() {
                 const events = @js($events);
@@ -96,6 +98,11 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('customer_id')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- Event --}}
@@ -124,6 +131,11 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('event_id')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
                 {{-- Tickets --}}
@@ -137,6 +149,11 @@
                             Sélectionnez les quantités
                         </span>
                     </div>
+                    @error('items')
+                        <p class="mb-4 text-sm text-red-600 dark:text-red-400">
+                            {{ $message }}
+                        </p>
+                    @enderror
 
                     {{-- Tickets disponibles --}}
                     <template x-if="tickets.length > 0">
@@ -178,11 +195,17 @@
                                             type="number"
                                             :id="'ticket-' + ticket.id"
                                             :name="'items[' + ticket.id + '][quantity]'"
-                                            value="0"
+                                            :value="oldItems[ticket.id]?.quantity ?? 0"
                                             min="0"
                                             :max="ticket.quantity"
                                             class="w-24 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                                         >
+                                        <template x-if="errors['items.' + ticket.id + '.quantity']">
+                                            <p
+                                                class="mt-2 text-sm text-red-600 dark:text-red-400"
+                                                x-text="errors['items.' + ticket.id + '.quantity'][0]"
+                                            ></p>
+                                        </template>
 
                                         <input
                                             type="hidden"
