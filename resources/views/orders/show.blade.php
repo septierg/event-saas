@@ -1,5 +1,18 @@
 <x-layouts.app>
 
+    @if (session('status'))
+        <div class="mb-6 rounded-lg bg-green-50 p-4 text-sm text-green-700 dark:bg-green-900/30 dark:text-green-300">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
     <div class="mb-6">
         <a
             href="{{ route('orders.index') }}"
@@ -19,9 +32,30 @@
                 </p>
             </div>
 
-            <span class="px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700">
-                {{ $order->status->label() }}
-            </span>
+            <div class="flex items-center gap-3">
+
+                @if ($order->status->isPending())
+                    <form
+                        method="POST"
+                        action="{{ route('orders.cancel', $order) }}"
+                        onsubmit="return confirm('Are you sure you want to cancel this order?');"
+                    >
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700"
+                        >
+                            Cancel order
+                        </button>
+                    </form>
+                @endif
+
+                <span class="px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-700">
+                    {{ $order->status->label() }}
+                </span>
+
+            </div>
         </div>
     </div>
 

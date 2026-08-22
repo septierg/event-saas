@@ -34,6 +34,20 @@ class OrderController extends Controller
         return view('orders.show', compact('order'));
     }
 
+    public function cancel(Order $order, OrderService $orderService)
+    {
+        try {
+            $orderService->cancel($order);
+        } catch (OrderException $e) {
+            return back()->with('error', $e->getMessage());
+        }
+
+        return redirect()
+            ->route('orders.show', $order)
+            ->with('status', 'Order cancelled successfully.');
+    }
+
+
     public function create()
     {
         $customers = Customer::orderBy('last_name')->get();

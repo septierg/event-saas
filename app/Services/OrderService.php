@@ -106,6 +106,42 @@ class OrderService
         });
     }
 
+    public function cancel(Order $order): Order
+    {
+        return DB::transaction(function () use ($order) {
+
+            if (! $order->status->isPending()) {
+                throw new OrderException(
+                    "Order {$order->reference} cannot be cancelled."
+                );
+            }
+
+            $order->load('items');
+
+            foreach ($order->items as $item) {
+
+                $ticketType = $order->event->ticketTypes()
+                    ->whereKey($item->ticket_type_id)
+                    ->lockForUpdate()
+                    ->firstOrFail();
+
+                if ($ticketType->quantity !== null) {
+                    $ticketType->increment('quantity', $item->quantity);
+                }
+            }
+
+            $order->update([
+                'status' => OrderStatus::CANCELLED,
+            ]);
+
+            return $order->fresh([
+                'customer',
+                'event',
+                'items.ticketType',
+            ]);
+        });
+    }
+
     protected function generateReference(): string
     {
         return 'ORD-' . now()->format('Y') . '-' . strtoupper(
