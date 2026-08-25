@@ -2,7 +2,7 @@
 
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
                 Orders
             </h1>
 
@@ -21,39 +21,39 @@
          
     </div>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+    <div class="overflow-hidden rounded-xl bg-white shadow-sm dark:bg-gray-800">
 
         <div class="overflow-x-auto">
 
             <table class="w-full text-sm text-left">
 
-                <thead class="bg-gray-50 dark:bg-gray-700">
+                <thead class="border-b border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900">
                     <tr>
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Reference
                         </th>
 
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Customer
                         </th>
 
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Event
                         </th>
 
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Status
                         </th>
 
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Total
                         </th>
 
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Date
                         </th>
 
-                        <th class="px-6 py-3 font-medium">
+                        <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
                             Actions
                         </th>
                     </tr>
@@ -93,9 +93,28 @@
                             <td class="px-6 py-4">
                                 <a
                                     href="{{ route('orders.show', $order) }}"
-                                    class="text-blue-600 hover:text-blue-800 dark:text-blue-400"
+                                    class="inline-flex items-center justify-center rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                 >
-                                    View
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        class="h-5 w-5"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                        />
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                    </svg>
                                 </a>
                             </td>
 
