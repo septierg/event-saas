@@ -1,13 +1,24 @@
 <x-layouts.app>
 
-    <div class="mb-6">
-        <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
-            Orders
-        </h1>
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                Orders
+            </h1>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            Manage ticket orders for your events.
-        </p>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Manage ticket orders for your events.
+            </p>
+
+        </div>
+
+        <a
+            href="{{ route('orders.create') }}"
+            class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+        >
+            + Create order
+        </a>
+         
     </div>
 
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
