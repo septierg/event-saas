@@ -41,4 +41,9 @@ class Event extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
 }

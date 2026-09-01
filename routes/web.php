@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\TicketTypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicEventController;
+use App\Http\Controllers\ParticipantController;
 
 Route::get('/', [PublicEventController::class, 'show'])->name('home');
 
@@ -20,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('events/{event}/ticket-types', [TicketTypeController::class, 'store'])->name('events.ticket-types.store');
     Route::put('events/{event}/ticket-types/{ticketType}', [TicketTypeController::class, 'update'])->name('events.ticket-types.update');
     Route::delete('events/{event}/ticket-types/{ticketType}', [TicketTypeController::class, 'destroy'])->name('events.ticket-types.destroy');
+
+    Route::post('/events/{event}/participants', [ParticipantController::class, 'store'])->name('events.participants.store');
 
     Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
