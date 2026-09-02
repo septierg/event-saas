@@ -198,6 +198,85 @@
     </section>
 
     {{-- Participants --}}
+    <section id="participants" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-widest">
+                        Participants
+                    </p>
+
+                    <h2 class="mt-3 text-3xl md:text-4xl font-bold">
+                        Les danseurs du jam
+                    </h2>
+
+                    <p class="mt-4 max-w-2xl text-gray-600 dark:text-gray-300">
+                        Découvrez les danseurs déjà inscrits à {{ $event->title }}.
+                    </p>
+                </div>
+
+                <div class="text-sm text-gray-500 dark:text-gray-400">
+                    {{ $event->participants->count() }}
+                    {{ $event->participants->count() === 1 ? 'participant' : 'participants' }}
+                </div>
+
+            </div>
+
+            @if ($event->participants->isNotEmpty())
+
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+
+                @foreach ($event->participants as $participant)
+
+                    <div
+                        class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm
+                                transition-all duration-300 ease-out
+                                hover:-translate-y-1
+                                hover:bg-gray-600 hover:text-white
+                                hover:shadow-lg
+                                dark:hover:bg-gray-700"
+                    >
+
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full
+                                bg-gray-100 dark:bg-gray-700
+                                transition-colors duration-300
+                                group-hover:bg-gray-200
+                                dark:group-hover:bg-gray-600">
+
+                        <span class="text-xl font-bold transition-colors duration-300
+                                    group-hover:text-gray-800
+                                    dark:group-hover:text-white">
+                            {{ strtoupper(substr($participant->first_name, 0, 1)) }}
+                        </span>
+
+                    </div>
+
+                        <h3 class="mt-5 text-xl font-bold">
+                            {{ $participant->alias }}
+                        </h3>
+
+                    </div>
+
+                @endforeach
+
+            </div>
+
+            @else
+
+                <div class="mt-12 rounded-xl bg-gray-100 dark:bg-gray-800 p-10 text-center">
+
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Les premiers participants seront bientôt annoncés.
+                    </p>
+
+                </div>
+
+            @endif
+
+        </div>
+    </section>
 
     {{-- Tickets --}}
     <section id="tickets" class="bg-gray-100 dark:bg-gray-900 py-24">

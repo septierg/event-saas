@@ -11,7 +11,7 @@ class PublicEventController extends Controller
             ->where('status', 'published')
             ->where('end_date', '>=', now())
             ->orderBy('start_date')
-            ->with('ticketTypes')
+            ->with(['ticketTypes', 'participants'])
             ->first();
 
         if (! $event) {
