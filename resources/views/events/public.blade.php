@@ -231,27 +231,15 @@
                 @foreach ($event->participants as $participant)
 
                     <div
-                        class="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm
+                        class="rounded-xl bg-white dark:bg-gray-800 p-8 shadow-sm
                                 transition-all duration-300 ease-out
                                 hover:-translate-y-1
-                                hover:bg-gray-600 hover:text-white
+                                hover:bg-gray-700 hover:text-white
                                 hover:shadow-lg
                                 dark:hover:bg-gray-700"
                     >
 
-                        <div class="flex items-center justify-center w-14 h-14 rounded-full
-                                bg-gray-100 dark:bg-gray-700
-                                transition-colors duration-300
-                                group-hover:bg-gray-200
-                                dark:group-hover:bg-gray-600">
-
-                        <span class="text-xl font-bold transition-colors duration-300
-                                    group-hover:text-gray-800
-                                    dark:group-hover:text-white">
-                            {{ strtoupper(substr($participant->first_name, 0, 1)) }}
-                        </span>
-
-                    </div>
+                      
 
                         <h3 class="mt-5 text-xl font-bold">
                             {{ $participant->alias }}
