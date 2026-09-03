@@ -62,11 +62,15 @@
 
             <div class="max-w-3xl">
 
-                <p class="text-sm font-semibold uppercase tracking-widest">
-                    L'événement
-                </p>
+                <div class="flex items-center gap-4">
+                    <div class="h-px w-12 bg-gray-900"></div>
 
-                <h2 class="mt-3 text-3xl md:text-4xl font-bold">
+                    <p class="text-sm font-semibold uppercase tracking-widest text-gray-500">
+                        L'événement
+                    </p>
+                </div>
+
+                <h2 class="mt-4 text-3xl md:text-4xl font-bold">
                     C'est quoi {{ $event->title }} ?
                 </h2>
 
@@ -80,7 +84,7 @@
     </section>
 
     {{-- Registration --}}
-    <section id="register" class="py-24">
+    <section id="register" class="bg-gray-50 dark:bg-gray-900/40 py-24">
         <div class="max-w-2xl mx-auto px-6">
 
             <div class="text-center">
@@ -108,7 +112,7 @@
             <form
                 action="{{ route('events.participants.store', $event) }}"
                 method="POST"
-                class="mt-10 space-y-6"
+                class="mt-10 space-y-6 rounded-2xl bg-white dark:bg-gray-800 p-8 md:p-10 shadow-sm"
             >
 
                 @csrf
@@ -198,7 +202,7 @@
     </section>
 
     {{-- Participants --}}
-    <section id="participants" class="py-24">
+    <section id="participants" class="bg-gray-50 dark:bg-gray-900/40 py-24">
         <div class="max-w-7xl mx-auto px-6">
 
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
@@ -286,13 +290,13 @@
 
                 @foreach ($event->ticketTypes as $ticket)
 
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8">
 
                         <h3 class="text-xl font-semibold">
                             {{ $ticket->name }}
                         </h3>
 
-                        <p class="mt-4 text-3xl font-bold">
+                        <p class="mt-4 text-4xl font-bold tracking-tight">
                             ${{ number_format($ticket->price, 2) }}
                         </p>
 
