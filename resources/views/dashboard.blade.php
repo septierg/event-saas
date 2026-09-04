@@ -6,44 +6,49 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <!-- EVENTS -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Total Users') }}</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">--</p>
-                    <p class="text-xs text-gray-500 flex items-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                        {{ __('No data') }}
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {{ __('Total Events') }}
                     </p>
+
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
+                        {{ $totalEvents }}
+                    </p>
+                    
                 </div>
                 <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500 dark:text-blue-300"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-blue-500 dark:text-blue-300"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor">
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"
+                        />
                     </svg>
                 </div>
             </div>
         </div>
 
-        <!-- Revenue Card -->
+        <!-- REVENUE -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Total Revenue') }}</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">--</p>
-                    <p class="text-xs text-gray-500 flex items-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                        {{ __('No data') }}
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {{ __('Total Revenue') }}
                     </p>
+
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
+                        ${{ number_format($totalRevenue, 2) }}
+                    </p>
+                    
                 </div>
                 <div class="bg-green-100 dark:bg-green-900 p-3 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 dark:text-green-300"
@@ -55,20 +60,18 @@
             </div>
         </div>
 
-        <!-- Orders Card -->
+        <!-- ORDERS -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Total Orders') }}</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">--</p>
-                    <p class="text-xs text-gray-500 flex items-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                        </svg>
-                        {{ __('No data') }}
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {{ __('Total Orders') }}
                     </p>
+
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
+                        {{ $totalOrders }}
+                    </p>
+                    
                 </div>
                 <div class="bg-purple-100 dark:bg-purple-900 p-3 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 dark:text-purple-300"
@@ -80,28 +83,33 @@
             </div>
         </div>
 
-        <!-- Visitors Card -->
+        <!-- PARTICIPANTS -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Total Visitors') }}</p>
-                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">--</p>
-                    <p class="text-xs text-gray-500 flex items-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                        </svg>
-                        {{ __('No data') }}
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {{ __('Total Participants') }}
                     </p>
+
+                    <p class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-1">
+                        {{ $totalParticipants }}
+                    </p>
+                    
                 </div>
                 <div class="bg-orange-100 dark:bg-orange-900 p-3 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500 dark:text-orange-300"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-orange-500 dark:text-orange-300"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm9 2a3 3 0 100-6m4 14v-2a3 3 0 00-3-3h-2"
+                        />
                     </svg>
                 </div>
             </div>

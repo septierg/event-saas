@@ -7,12 +7,11 @@ use App\Http\Controllers\TicketTypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicEventController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', [PublicEventController::class, 'show'])->name('home');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
 
