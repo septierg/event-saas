@@ -115,6 +115,34 @@
             </main>
         </div>
     </div>
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-800">
+
+        <div class="max-w-7xl mx-auto px-6 py-8">
+
+            <div class="flex flex-col md:flex-row justify-between gap-4">
+
+                <div>
+                    <p class="font-semibold">
+                        {{ $event->title ?? config('app.name') }}
+                    </p>
+
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                        Une expérience créée pour la communauté.
+                    </p>
+                </div>
+
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    © {{ date('Y') }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>    
+
+    
 </body>
 
 </html>
