@@ -40,6 +40,7 @@
         <form
             method="POST"
             action="{{ route('events.update', $event) }}"
+            enctype="multipart/form-data"
             class="space-y-6"
         >
 
@@ -125,6 +126,35 @@
                     </p>
                 @enderror
 
+            </div>
+
+            {{-- Image --}}
+            <div>
+                <label
+                    for="image"
+                    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                >
+                    Event image
+                </label>
+
+                <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    accept="image/*"
+                    class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm text-gray-900
+                        file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-4 file:py-2
+                        file:text-sm file:font-medium
+                        hover:file:bg-gray-200
+                        dark:border-gray-600 dark:bg-gray-700 dark:text-white
+                        dark:file:bg-gray-600 dark:file:text-white"
+                >
+
+                @error('image')
+                    <p class="mt-1 text-sm text-red-600">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
 
