@@ -11,6 +11,20 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [PublicEventController::class, 'show'])->name('home');
 
+Route::get('/locale/{locale}', function (string $locale) {
+
+    abort_unless(
+        in_array($locale, ['fr', 'en']),
+        404
+    );
+
+    session(['locale' => $locale]);
+
+    return back();
+
+})->name('locale');
+
+
 Route::get('dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {

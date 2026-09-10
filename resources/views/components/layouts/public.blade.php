@@ -42,35 +42,68 @@
 
                 <div class="flex items-center justify-between">
 
+                    {{-- Logo / Event name --}}
                     <a
-                        href="#"
+                        href="{{ route('home') }}"
                         class="text-xl font-bold"
                     >
                         {{ $event->title ?? config('app.name') }}
                     </a>
 
-                    <div class="hidden md:flex items-center gap-8">
+                    <div class="flex items-center gap-6">
 
-                        <a
-                            href="#about"
-                            class="text-sm font-medium hover:text-gray-500"
-                        >
-                            À propos
-                        </a>
+                        {{-- Desktop navigation --}}
+                        <div class="hidden md:flex items-center gap-8">
 
-                        <a
-                            href="#register"
-                            class="text-sm font-medium hover:text-gray-500"
-                        >
-                            S'inscrire
-                        </a>
+                            <a
+                                href="#about"
+                                class="text-sm font-medium hover:text-gray-500"
+                            >
+                                {{ __('public.about') }}
+                            </a>
 
-                        <a
-                            href="#tickets"
-                            class="rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
-                        >
-                            Acheter un billet
-                        </a>
+                            <a
+                                href="#register"
+                                class="text-sm font-medium hover:text-gray-500"
+                            >
+                                {{ __('public.register') }}
+                            </a>
+
+                            <a
+                                href="#tickets"
+                                class="rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white
+                                    hover:bg-gray-700
+                                    dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200"
+                            >
+                                {{ __('public.buy_ticket') }}
+                            </a>
+
+                        </div>
+
+                        {{-- Language switcher --}}
+                        <div class="flex items-center gap-2 text-sm font-medium">
+
+                            <a
+                                href="{{ route('locale', 'fr') }}"
+                                class="{{ app()->getLocale() === 'fr'
+                                    ? 'text-gray-900 dark:text-white'
+                                    : 'text-gray-400 hover:text-gray-700 dark:hover:text-gray-200' }}"
+                            >
+                                FR
+                            </a>
+
+                            <span class="text-gray-300 dark:text-gray-700">|</span>
+
+                            <a
+                                href="{{ route('locale', 'en') }}"
+                                class="{{ app()->getLocale() === 'en'
+                                    ? 'text-gray-900 dark:text-white'
+                                    : 'text-gray-400 hover:text-gray-700 dark:hover:text-gray-200' }}"
+                            >
+                                EN
+                            </a>
+
+                        </div>
 
                     </div>
 
