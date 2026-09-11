@@ -31,5 +31,5 @@ return [
 
     'no_participants' => 'Les premiers participants seront bientôt annoncés.',
 
-    'footer_description' => 'Une expérience créée pour la communauté.',
+    'footer_description' => 'Une expérience créée par la communauté, pour la communauté.',
 ];
