@@ -38,14 +38,14 @@
                         href="#register"
                         class="rounded-md bg-white px-6 py-3 font-semibold text-gray-900 hover:bg-gray-200"
                     >
-                        Register
+                        {{ __('public.register') }}
                     </a>
 
                     <a
                         href="#tickets"
                         class="rounded-md border border-white px-6 py-3 font-semibold text-white hover:bg-white/10"
                     >
-                        Acheter un billet
+                        {{ __('public.buy_ticket') }}
                     </a>
 
                 </div>
@@ -66,12 +66,12 @@
                     <div class="h-px w-12 bg-gray-900"></div>
 
                     <p class="text-sm font-semibold uppercase tracking-widest text-gray-500">
-                        L'événement
+                        {{ __('public.event') }}
                     </p>
                 </div>
 
                 <h2 class="mt-4 text-3xl md:text-4xl font-bold">
-                    C'est quoi {{ $event->title }} ?
+                    {{ __('public.what_is', ['title' => $event->title]) }}
                 </h2>
 
                 <div class="mt-8 text-lg leading-8 text-gray-600 dark:text-gray-300">
@@ -90,15 +90,15 @@
             <div class="text-center">
 
                 <p class="text-sm font-semibold uppercase tracking-widest">
-                    Registration
+                    {{ __('public.registration') }}
                 </p>
 
                 <h2 class="mt-3 text-3xl md:text-4xl font-bold">
-                    Inscrivez-vous au jam
+                    {{ __('public.register_to_jam') }}
                 </h2>
 
                 <p class="mt-4 text-gray-600 dark:text-gray-300">
-                    Entrez vos informations pour participer à l'événement.
+                    {{ __('public.registration_description') }} 
                 </p>
 
             </div>
@@ -122,7 +122,7 @@
                         for="first_name"
                         class="block text-sm font-medium"
                     >
-                        Prénom
+                        {{ __('public.first_name') }}
                     </label>
 
                     <input
@@ -146,7 +146,7 @@
                         for="last_name"
                         class="block text-sm font-medium"
                     >
-                        Nom
+                        {{ __('public.last_name') }}
                     </label>
 
                     <input
@@ -170,7 +170,7 @@
                         for="alias"
                         class="block text-sm font-medium"
                     >
-                        Alias / Nom de danseur
+                        {{ __('public.dancer_alias') }} 
                     </label>
 
                     <input
@@ -193,7 +193,7 @@
                     type="submit"
                     class="w-full rounded-md bg-gray-900 px-6 py-3 font-semibold text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900"
                 >
-                    Register
+                    {{ __('public.registration') }}
                 </button>
 
             </form>
@@ -209,15 +209,15 @@
 
                 <div>
                     <p class="text-sm font-semibold uppercase tracking-widest">
-                        Participants
+                        {{ __('public.participants') }}
                     </p>
 
                     <h2 class="mt-3 text-3xl md:text-4xl font-bold">
-                        Les danseurs du jam
+                        {{ __('public.dancers_of_jam') }}
                     </h2>
 
                     <p class="mt-4 max-w-2xl text-gray-600 dark:text-gray-300">
-                        Découvrez les danseurs déjà inscrits à {{ $event->title }}.
+                        {{ __('public.participants_description', ['title' => $event->title]) }}
                     </p>
                 </div>
 
@@ -260,7 +260,7 @@
                 <div class="mt-12 rounded-xl bg-gray-100 dark:bg-gray-800 p-10 text-center">
 
                     <p class="text-gray-600 dark:text-gray-300">
-                        Les premiers participants seront bientôt annoncés.
+                        {{ __('public.no_participants') }}
                     </p>
 
                 </div>
@@ -277,11 +277,11 @@
             <div class="text-center">
 
                 <p class="text-sm font-semibold uppercase tracking-widest">
-                    Billetterie
+                    {{ __('public.tickets') }}
                 </p>
 
                 <h2 class="mt-3 text-3xl md:text-4xl font-bold">
-                    Choisissez votre billet
+                    {{ __('public.choose_ticket') }}
                 </h2>
 
             </div>
@@ -310,7 +310,7 @@
                             href="{{ route('orders.create') }}"
                             class="mt-6 block w-full rounded-md bg-gray-900 px-4 py-3 text-center font-semibold text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900"
                         >
-                            Acheter
+                            {{ __('public.buy') }}
                         </a>
 
                     </div>
