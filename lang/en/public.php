@@ -31,4 +31,10 @@ return [
     'no_participants' => 'The first participants will be announced soon.',
 
     'footer_description' => 'An experience created by the community, for the community.',
+
+    'login' => 'Log in to your account',
+    'forgot' => 'Forgot password?',
+    'signin' => 'Sign In',
+    'signup' => 'Sign up',
+    'donthave' => 'Don\'t have an account?'
 ];

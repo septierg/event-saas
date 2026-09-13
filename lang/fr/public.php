@@ -32,4 +32,10 @@ return [
     'no_participants' => 'Les premiers participants seront bientôt annoncés.',
 
     'footer_description' => 'Une expérience créée par la communauté, pour la communauté.',
+
+    'login' => 'Connectez-vous à votre compte',
+    'forgot' => 'Mot de passe oublié ?',
+    'signin' => 'Se connecter',
+    'signup' => 'S\'inscrire',
+    'donthave' => 'Vous n\'avez pas de compte ?'
 ];
