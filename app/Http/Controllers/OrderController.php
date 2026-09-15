@@ -25,11 +25,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load([
-            'customer',
-            'event',
-            'items.ticketType',
-        ]);
+        $order->load(['customer', 'event', 'items.ticketType']);
 
         return view('orders.show', compact('order'));
     }
@@ -51,7 +47,6 @@ class OrderController extends Controller
     public function create()
     {
         $customers = Customer::orderBy('last_name')->get();
-
         $events = Event::query()
             ->whereIn('status', ['draft', 'published'])
             ->orderBy('start_date')
@@ -99,7 +94,6 @@ class OrderController extends Controller
         }
 
         $customer = Customer::findOrFail($validated['customer_id']);
-
         $event = Event::findOrFail($validated['event_id']);
 
         try {
