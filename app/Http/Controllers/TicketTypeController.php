@@ -7,49 +7,17 @@ use App\Models\TicketType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\TicketTypeRequest;
 
 class TicketTypeController extends Controller
 {
     /**
      * Store a newly created ticket type.
      */
-    public function store(Request $request, Event $event): RedirectResponse
+    public function store(TicketTypeRequest $request, Event $event): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-            'description' => [
-                'nullable',
-                'string',
-            ],
-            'price' => [
-                'required',
-                'numeric',
-                'min:0',
-            ],
-            'quantity' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
-            'sales_start' => [
-                'nullable',
-                'date',
-            ],
-            'sales_end' => [
-                'nullable',
-                'date',
-                'after_or_equal:sales_start',
-            ],
-            'status' => [
-                'required',
-                Rule::in(['active', 'inactive']),
-            ],
-        ]);
-
+        $validated = $request->validated();
+          
         $event->ticketTypes()->create($validated);
 
         return redirect()
@@ -61,46 +29,13 @@ class TicketTypeController extends Controller
      * Update the specified ticket type.
      */
     public function update(
-        Request $request,
+        TicketTypeRequest $request,
         Event $event,
         TicketType $ticketType
     ): RedirectResponse {
         abort_unless($ticketType->event_id === $event->id, 404);
 
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-            'description' => [
-                'nullable',
-                'string',
-            ],
-            'price' => [
-                'required',
-                'numeric',
-                'min:0',
-            ],
-            'quantity' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
-            'sales_start' => [
-                'nullable',
-                'date',
-            ],
-            'sales_end' => [
-                'nullable',
-                'date',
-                'after_or_equal:sales_start',
-            ],
-            'status' => [
-                'required',
-                Rule::in(['active', 'inactive']),
-            ],
-        ]);
+        $validated = $request->validate();
 
         $ticketType->update($validated);
 
