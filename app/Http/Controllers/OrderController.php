@@ -53,10 +53,7 @@ class OrderController extends Controller
             ->with('ticketTypes')
             ->get();
 
-        return view('orders.create', compact(
-            'customers',
-            'events'
-        ));
+        return view('orders.create', compact('customers', 'events'));
     }
 
     public function store(Request $request, OrderService $orderService)

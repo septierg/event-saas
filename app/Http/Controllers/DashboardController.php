@@ -18,11 +18,6 @@ class DashboardController extends Controller
 
         $totalParticipants = Participant::count();
 
-        return view('dashboard', compact(
-            'totalEvents',
-            'totalRevenue',
-            'totalOrders',
-            'totalParticipants'
-        ));
+        return view('dashboard', compact('totalEvents', 'totalRevenue', 'totalOrders', 'totalParticipants'));
     }
 }
