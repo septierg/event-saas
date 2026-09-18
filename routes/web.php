@@ -9,6 +9,11 @@ use App\Http\Controllers\PublicEventController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\DashboardController;
 
+Route::get('/orders/{order}/success', [OrderController::class, 'success'])->name('orders.success');
+Route::get('/orders/{order}/payment-cancelled', [OrderController::class, 'paymentCancelled'])->name('orders.payment-cancelled');
+
+
+
 Route::get('/', [PublicEventController::class, 'show'])->name('home');
 
 Route::get('/locale/{locale}', function (string $locale) {
@@ -37,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/events/{event}/participants', [ParticipantController::class, 'store'])->name('events.participants.store');
 
-    Route::post('orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+    Route::post('orders/{order}/cancel',  [OrderController::class, 'cancel'])->name('orders.cancelled');
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('orders', [OrderController::class, 'store'])->name('orders.store');

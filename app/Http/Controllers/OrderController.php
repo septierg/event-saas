@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use App\Exceptions\OrderException;
+use App\Services\StripeService;
 
 class OrderController extends Controller
 {
@@ -56,7 +57,7 @@ class OrderController extends Controller
         return view('orders.create', compact('customers', 'events'));
     }
 
-    public function store(Request $request, OrderService $orderService)
+    public function store(Request $request, OrderService $orderService, StripeService $stripeService)
     {
         $validated = $request->validate([
             'customer_id' => ['required', 'exists:customers,id'],
@@ -99,15 +100,30 @@ class OrderController extends Controller
                 $event,
                 $validated['items']
             );
+
+            $checkoutSession = $stripeService->createCheckoutSession($order);
+
         } catch (OrderException $e) {
             return back()
                 ->withInput()
                 ->with('error', $e->getMessage());
         }
 
+        return redirect()->away($checkoutSession->url);
+        
         return redirect()
             ->route('orders.show', $order)
             ->with('status', 'Order created successfully.');
+    }
+
+    public function success(Order $order)
+    {
+        return view('orders.success', compact('order'));
+    }
+
+    public function paymentCancelled(Order $order)
+    {
+        return view('orders.cancel', compact('order'));
     }
 
 }
