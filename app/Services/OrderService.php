@@ -50,21 +50,21 @@ class OrderService
                     );
                 }
 
-                $now = now();
+                $quantity = (int) ($item['quantity'] ?? 0);
 
+                if ($quantity < 1) {
+                    continue;
+                }
+
+                $now = now();
+                
                 if (
                     ($ticketType->sales_start && $now->lt($ticketType->sales_start)) ||
                     ($ticketType->sales_end && $now->gt($ticketType->sales_end))
                 ) {
-                    throw new OrderException(//check ticket sale date and end
+                    throw new OrderException(
                         "Ticket sales are not currently available for {$ticketType->name}."
                     );
-                }
-
-                $quantity = (int) $item['quantity'];
-
-                if ($quantity < 1) {
-                    continue;
                 }
 
                 if (

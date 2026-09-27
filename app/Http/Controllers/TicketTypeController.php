@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\TicketType;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use App\Http\Requests\TicketTypeRequest;
 
 class TicketTypeController extends Controller
@@ -35,7 +33,7 @@ class TicketTypeController extends Controller
     ): RedirectResponse {
         abort_unless($ticketType->event_id === $event->id, 404);
 
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         $ticketType->update($validated);
 
