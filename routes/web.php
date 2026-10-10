@@ -8,6 +8,10 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PublicEventController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StripeWebhookController;
+
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])
+    ->name('stripe.webhook');
 
 Route::get('/orders/{order}/success', [OrderController::class, 'success'])->name('orders.success');
 Route::get('/orders/{order}/payment-cancelled', [OrderController::class, 'paymentCancelled'])->name('orders.payment-cancelled');
