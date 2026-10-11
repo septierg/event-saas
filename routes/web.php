@@ -9,13 +9,21 @@ use App\Http\Controllers\PublicEventController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\PublicOrderController;
 
+//stripe
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])
     ->name('stripe.webhook');
 
 Route::get('/orders/{order}/success', [OrderController::class, 'success'])->name('orders.success');
 Route::get('/orders/{order}/payment-cancelled', [OrderController::class, 'paymentCancelled'])->name('orders.payment-cancelled');
 
+// Achat public : accessible sans connexion
+Route::get('/checkout/{event}', [PublicOrderController::class, 'create'])
+    ->name('public.orders.create');
+
+Route::post('/checkout/{event}', [PublicOrderController::class, 'store'])
+    ->name('public.orders.store');
 
 
 Route::get('/', [PublicEventController::class, 'show'])->name('home');

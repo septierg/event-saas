@@ -307,7 +307,10 @@
                         @endif
 
                         <a
-                            href="{{ route('orders.create') }}"
+                            href="{{ route('public.orders.create', [
+                                'event' => $event,
+                                'ticket_type' => $ticket->id,
+                            ]) }}"
                             class="mt-6 block w-full rounded-md bg-gray-900 px-4 py-3 text-center font-semibold text-white hover:bg-gray-700 dark:bg-white dark:text-gray-900"
                         >
                             {{ __('public.buy') }}
